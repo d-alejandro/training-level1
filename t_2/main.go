@@ -32,15 +32,15 @@ func main() {
 	waitGroup.Wait()
 
 	squares.Range(func(keyMap, valueMap any) bool {
-		fmt.Println("value:", keyMap, ", square:", valueMap)
+		fmt.Println(keyMap, "=>", valueMap)
 		return true
 	})
 }
 
 /*
-value: 4 , square: 16
-value: 6 , square: 36
-value: 8 , square: 64
-value: 10 , square: 100
-value: 2 , square: 4
+6 => 36
+8 => 64
+10 => 100
+2 => 4
+4 => 16
 */

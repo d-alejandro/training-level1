@@ -24,6 +24,7 @@ func main() {
 
 		go func(value int, channel chan<- Square) {
 			channel <- Square{value, value * value}
+			close(channel)
 		}(value, channelArray[key])
 	}
 
@@ -33,15 +34,30 @@ func main() {
 
 	for counter < arrayLength {
 		select {
-		case square := <-channelArray[0]:
+		case square, opened := <-channelArray[0]:
+			if !opened {
+				continue
+			}
 			squares = append(squares, square)
-		case square := <-channelArray[1]:
+		case square, opened := <-channelArray[1]:
+			if !opened {
+				continue
+			}
 			squares = append(squares, square)
-		case square := <-channelArray[2]:
+		case square, opened := <-channelArray[2]:
+			if !opened {
+				continue
+			}
 			squares = append(squares, square)
-		case square := <-channelArray[3]:
+		case square, opened := <-channelArray[3]:
+			if !opened {
+				continue
+			}
 			squares = append(squares, square)
-		case square := <-channelArray[4]:
+		case square, opened := <-channelArray[4]:
+			if !opened {
+				continue
+			}
 			squares = append(squares, square)
 		}
 

@@ -15,8 +15,6 @@ type Square struct {
 func main() {
 	array := [5]int{2, 4, 6, 8, 10}
 
-	var squares []Square
-
 	channelSquare := make(chan Square)
 
 	for _, value := range array {
@@ -24,6 +22,8 @@ func main() {
 			channel <- Square{value, value * value}
 		}(value, channelSquare)
 	}
+
+	var squares []Square
 
 	counter := 0
 	arrayLength := len(array)

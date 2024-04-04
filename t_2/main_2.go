@@ -10,6 +10,10 @@ import (
 взятых из массива (2,4,6,8,10) и выведет их квадраты в stdout.
 */
 
+/*
+Запись результата в map c использованием sync.Mutex.
+*/
+
 type SquareCalculation struct {
 	sync.Mutex
 	Squares map[int]int

@@ -14,6 +14,10 @@ import (
 должна завершаться.
 */
 
+/*
+Программа завершается после чтения из канала данных от context.WithTimeout.
+*/
+
 func main() {
 	const sleepSeconds = 3
 

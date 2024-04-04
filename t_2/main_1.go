@@ -10,6 +10,10 @@ import (
 взятых из массива (2,4,6,8,10) и выведет их квадраты в stdout.
 */
 
+/*
+Запись результата в sync.Map.
+*/
+
 func main() {
 	const waitGroupDelta = 1
 

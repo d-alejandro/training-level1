@@ -86,19 +86,17 @@ func runPublisher(workerCount uint, workerChannels []chan int) {
 	waitGroup.Add(1)
 
 	go func() {
-		for {
-			if atomicStopFlag.Load() {
-				for channelNumber = 0; channelNumber < workerCount; channelNumber++ {
-					close(workerChannels[channelNumber])
-				}
-				break
-			}
-
+		for !atomicStopFlag.Load() {
 			value := rand.IntN(1000)
+
 			for channelNumber = 0; channelNumber < workerCount; channelNumber++ {
 				workerChannels[channelNumber] <- value
 				fmt.Println("Sent", value, "to Worker #", channelNumber+1)
 			}
+		}
+
+		for channelNumber = 0; channelNumber < workerCount; channelNumber++ {
+			close(workerChannels[channelNumber])
 		}
 
 		fmt.Println("Publisher stop")

@@ -22,7 +22,7 @@ import (
 
 var (
 	atomicStopFlag atomic.Bool
-	waitGroup      sync.WaitGroup
+	wg             sync.WaitGroup
 )
 
 func main() {
@@ -42,7 +42,7 @@ func main() {
 
 	atomicStopFlag.Store(true)
 
-	waitGroup.Wait()
+	wg.Wait()
 }
 
 func getWorkerCountValue() uint {
@@ -65,7 +65,7 @@ func runWorkers(workerCount uint, workerChannels []chan int) {
 	for channelNumber = 0; channelNumber < workerCount; channelNumber++ {
 		workerChannels[channelNumber] = make(chan int)
 
-		waitGroup.Add(1)
+		wg.Add(1)
 
 		go func(workerNumber uint, channel <-chan int) {
 			for number := range channel {
@@ -75,7 +75,7 @@ func runWorkers(workerCount uint, workerChannels []chan int) {
 
 			fmt.Println("Worker #", workerNumber, "stop")
 
-			waitGroup.Done()
+			wg.Done()
 		}(channelNumber+1, workerChannels[channelNumber])
 	}
 }
@@ -83,7 +83,7 @@ func runWorkers(workerCount uint, workerChannels []chan int) {
 func runPublisher(workerCount uint, workerChannels []chan int) {
 	var channelNumber uint
 
-	waitGroup.Add(1)
+	wg.Add(1)
 
 	go func() {
 		for !atomicStopFlag.Load() {
@@ -101,7 +101,7 @@ func runPublisher(workerCount uint, workerChannels []chan int) {
 
 		fmt.Println("Publisher stop")
 
-		waitGroup.Done()
+		wg.Done()
 	}()
 }
 

@@ -65,7 +65,7 @@ func getTemperaturePoint(value float64) int64 {
 
 func isFloatEqual(a float64, b float64) bool {
 	const epsilon = 0.00000001
-	return math.Abs((a-b)/b) < epsilon
+	return math.Abs(a-b) < epsilon
 }
 
 /*

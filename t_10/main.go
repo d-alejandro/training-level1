@@ -67,3 +67,24 @@ func isFloatEqual(a float64, b float64) bool {
 	const epsilon = 0.00000001
 	return math.Abs((a-b)/b) < epsilon
 }
+
+/*
+ {
+  "-30": [
+    -25.4,
+    -27,
+    -21
+  ],
+  "10": [
+    13,
+    19,
+    15.5
+  ],
+  "20": [
+    24.5
+  ],
+  "30": [
+    32.5
+  ]
+}
+*/

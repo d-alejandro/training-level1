@@ -44,3 +44,8 @@ func _someFunc() {
 func _createHugeString(symbolCount int) string {
 	return strings.Repeat("क्षि", symbolCount)
 }
+
+/*
+Кол-во символов в строке из функции createHugeString(int) string: 1024
+Кол-во символов в переменной justString после копирования: 100
+*/

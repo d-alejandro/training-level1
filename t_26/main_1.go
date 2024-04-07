@@ -16,6 +16,10 @@ abCdefAaf — false
 aabcd — false
 */
 
+/*
+Способ с применением поиска дубликатов в цикле
+*/
+
 func main() {
 	const (
 		string1 = "abcd"
@@ -44,3 +48,9 @@ func check(text string) bool {
 	}
 	return true
 }
+
+/*
+abcd = true
+abCdefAaf = false
+aabcd = false
+*/

@@ -13,6 +13,10 @@ import (
 Пример: «snow dog sun — sun dog snow».
 */
 
+/*
+Способ с применением перебора в цикле
+*/
+
 func main() {
 	fmt.Println("Введите строку:")
 

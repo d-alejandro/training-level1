@@ -14,6 +14,10 @@ import (
 Пример: «snow dog sun — sun dog snow».
 */
 
+/*
+Способ с применением slices.Reverse()
+*/
+
 func main() {
 	fmt.Println("Введите строку:")
 

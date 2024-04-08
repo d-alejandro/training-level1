@@ -11,6 +11,10 @@ import (
 значение счетчика.
 */
 
+/*
+Способ с применением структуры sync.Mutex
+*/
+
 type Counter struct {
 	sync.Mutex
 	total uint64

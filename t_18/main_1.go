@@ -12,6 +12,10 @@ import (
 значение счетчика.
 */
 
+/*
+Способ с применением структуры atomic.Uint64
+*/
+
 type AtomicCounter struct {
 	atomic atomic.Uint64
 }

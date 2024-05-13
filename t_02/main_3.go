@@ -27,51 +27,47 @@ func main() {
 	for key, value := range array {
 		channelArray[key] = make(chan Square)
 
-		go func(value int, channel chan<- Square) {
-			channel <- Square{value, value * value}
-			close(channel)
-		}(value, channelArray[key])
+		go calculateAndSendResult(value, channelArray[key])
 	}
 
-	var squares []Square
+	var (
+		squares []Square
+		counter int
+	)
 
-	counter := 0
+	checkChannel := func(opened bool, square Square, channelNumber int) {
+
+		if opened {
+			channelArray[channelNumber] = nil
+			squares = append(squares, square)
+			counter++
+		}
+	}
 
 	for counter < arrayLength {
 		select {
 		case square, opened := <-channelArray[0]:
-			if !opened {
-				continue
-			}
-			squares = append(squares, square)
+			checkChannel(opened, square, 0)
 		case square, opened := <-channelArray[1]:
-			if !opened {
-				continue
-			}
-			squares = append(squares, square)
+			checkChannel(opened, square, 1)
 		case square, opened := <-channelArray[2]:
-			if !opened {
-				continue
-			}
-			squares = append(squares, square)
+			checkChannel(opened, square, 2)
 		case square, opened := <-channelArray[3]:
-			if !opened {
-				continue
-			}
-			squares = append(squares, square)
+			checkChannel(opened, square, 3)
 		case square, opened := <-channelArray[4]:
-			if !opened {
-				continue
-			}
-			squares = append(squares, square)
+			checkChannel(opened, square, 4)
+		default:
 		}
-
-		counter++
 	}
 
 	for _, square := range squares {
 		fmt.Println(square.key, "=>", square.value)
 	}
+}
+
+func calculateAndSendResult(value int, channel chan<- Square) {
+	channel <- Square{value, value * value}
+	close(channel)
 }
 
 /*

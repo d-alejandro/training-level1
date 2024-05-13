@@ -43,10 +43,10 @@ func main() {
 	for _, value := range array {
 		waitGroup.Add(waitGroupDelta)
 
-		go func(value int) {
+		go func() {
 			squareCalculation.Set(value, value*value)
 			waitGroup.Done()
-		}(value)
+		}()
 	}
 
 	waitGroup.Wait()

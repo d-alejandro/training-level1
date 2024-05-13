@@ -56,7 +56,6 @@ func main() {
 			checkChannel(opened, square, 3)
 		case square, opened := <-channelArray[4]:
 			checkChannel(opened, square, 4)
-		default:
 		}
 	}
 

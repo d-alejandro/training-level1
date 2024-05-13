@@ -27,10 +27,10 @@ func main() {
 	for _, value := range array {
 		waitGroup.Add(waitGroupDelta)
 
-		go func(value int) {
+		go func() {
 			squares.Store(value, value*value)
 			waitGroup.Done()
-		}(value)
+		}()
 	}
 
 	waitGroup.Wait()
